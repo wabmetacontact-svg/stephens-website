@@ -1,0 +1,2 @@
+﻿src/components/WorkSection.tsx(160,10): error TS6133: 'progress' is declared but its value is never read.
+src/components/WorkSection.tsx(460,52): error TS6133: 'isHovered' is declared but its value is never read.
