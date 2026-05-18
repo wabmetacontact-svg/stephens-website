@@ -250,6 +250,7 @@ function FeaturedBlogCard({ post, isVisible, isHovered, onHover }: {
                     position: "relative",
                     minHeight: "320px",
                     overflow: "hidden",
+                    backgroundColor: "#140a24",
                 }}>
                     <img
                         src={post.image}
@@ -259,6 +260,7 @@ function FeaturedBlogCard({ post, isVisible, isHovered, onHover }: {
                         style={{
                             width: "100%", height: "100%",
                             objectFit: "cover",
+                            objectPosition: "left center",
                             opacity: imageLoaded ? 1 : 0,
                             transition: "opacity .5s ease, transform .4s ease",
                             transform: isHovered ? `scale(1.05) translate(${(mousePos.x - 0.5) * -6}px, ${(mousePos.y - 0.5) * -6}px)` : "scale(1)",
@@ -446,9 +448,9 @@ function BlogCard({ post, index, isVisible, isHovered, onHover }: {
                 {/* ═══ IMAGE SECTION ═══ */}
                 <div style={{
                     position: "relative",
-                    height: "220px",
+                    aspectRatio: "16/9",
                     overflow: "hidden",
-                    background: "var(--bg-section)",
+                    background: "#140a24",
                 }}>
                     <img
                         src={post.image}
