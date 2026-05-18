@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import CustomCursor from "./components/CustomCursor";
 import GrainOverlay from "./components/GrainOverlay";
 import Navbar from "./components/Navbar";
@@ -10,6 +11,7 @@ const WorkSection = lazy(() => import("./components/WorkSection"));
 const ServicesSection = lazy(() => import("./components/ServicesSection"));
 const BlogSection = lazy(() => import("./components/BlogSection"));
 const ContactSection = lazy(() => import("./components/ContactSection"));
+const BlogPostPage = lazy(() => import("./components/BlogPostPage"));
 
 function SectionLoader() {
   return (
@@ -31,23 +33,39 @@ function SectionLoader() {
   );
 }
 
+function HomePage() {
+  return (
+    <main>
+      <HeroSection />
+      <MarqueeSection />
+      <Suspense fallback={<SectionLoader />}>
+        <AboutSection />
+        <WorkSection />
+        <ServicesSection />
+        <BlogSection />
+        <ContactSection />
+      </Suspense>
+    </main>
+  );
+}
+
 export function App() {
   return (
     <div style={{ background: "var(--bg)", minHeight: "100vh", position: "relative" }}>
       <GrainOverlay />
       <CustomCursor />
       <Navbar />
-      <main>
-        <HeroSection />
-        <MarqueeSection />
-        <Suspense fallback={<SectionLoader />}>
-          <AboutSection />
-          <WorkSection />
-          <ServicesSection />
-          <BlogSection />
-          <ContactSection />
-        </Suspense>
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/blog/:slug"
+          element={
+            <Suspense fallback={<SectionLoader />}>
+              <BlogPostPage />
+            </Suspense>
+          }
+        />
+      </Routes>
     </div>
   );
 }
